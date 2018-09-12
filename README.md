@@ -16,3 +16,7 @@ $BROWSER http://localhost:8003
 ```
 
 (`localhost:8003` is hardcoded in the js…  Deal with it, or open a PR :P)
+
+## Results
+
+![Plot](newplot.png)
