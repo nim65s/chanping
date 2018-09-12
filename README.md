@@ -7,6 +7,7 @@ Draw a box chart from the results.
 ## Run it:
 
 ```
+docker run -p 6379:6379 -d redis:2.8
 pipenv install
 pipenv shell
 ./manage.py migrate
