@@ -6,16 +6,22 @@ Draw a box chart from the results.
 
 ## Run it:
 
+- with [proxyta.net](proxyta.net)
+
 ```
-docker run -p 6379:6379 -d redis:2.8
+docker-compose up -d
+```
+
+- or with pipenv
+
+```
+docker run -p 6379:6379 -d redis
 pipenv install
 pipenv shell
 ./manage.py migrate
-./manage.py runserver 0.0.0.0:8003
-$BROWSER http://localhost:8003
+./manage.py runserver
+$BROWSER http://localhost:8000
 ```
-
-(`localhost:8003` is hardcoded in the js…  Deal with it, or open a PR :P)
 
 ## Results
 

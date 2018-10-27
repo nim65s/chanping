@@ -10,7 +10,8 @@
     </body>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
-        var socket = new WebSocket('ws://localhost:8003/ws');
+        var loc = window.location;
+        var socket = new WebSocket(((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + "/ws");
         var http_data=[], ws_data = [];
 
         function httpping() {

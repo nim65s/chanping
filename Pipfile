@@ -4,10 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [requires]
-python_version = "3.5"
+python_version = "3.7"
 
 [packages]
-channels = "*"
 channels-redis = "*"
 
 [dev-packages]
