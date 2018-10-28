@@ -9,6 +9,7 @@ Draw a box chart from the results.
 - with [proxyta.net](proxyta.net)
 
 ```
+echo SECRET_KEY=$(openssl rand -base64 32) >> .env
 docker-compose up -d
 ```
 
