@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>ChanPing</title>
-    </head>
-    <body>
-        <h2>Benchmarking usual django views (in channels) VS AsyncJsonWebsocketConsumer
-        <div id="plot"></div>
-    </body>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script>
-        var loc = window.location;
-        var socket = new WebSocket(((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + "/ws");
-        var http_data=[], ws_data = [];
+  <head>
+    <meta charset="utf-8"/>
+    <title>ChanPing</title>
+  </head>
+  <body>
+    <h2>Benchmarking usual django views (in channels) VS AsyncJsonWebsocketConsumer</h2>
+    <div id="plot"></div>
+  </body>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+var loc = window.location;
+var socket = new WebSocket(((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + "/ws");
+var http_data=[], ws_data = [];
 
-        function httpping() {
-            var ping = new Date().getTime();
-            fetch('/ping?ping=' + ping)
-                .then(r => r.json())
-                .then(data => {
-                    var now = new Date().getTime();
-                    http_data.push(now - data.pong);
-                });
-        }
+function httpping() {
+  var ping = new Date().getTime();
+  fetch('/ping?ping=' + ping)
+    .then(r => r.json())
+    .then(data => {
+      var now = new Date().getTime();
+      http_data.push(now - data.pong);
+    });
+}
 
-        function wsping() {
-            var ping = new Date().getTime();
-            socket.send(JSON.stringify({'ping': ping}));
-        }
+function wsping() {
+  var ping = new Date().getTime();
+  socket.send(JSON.stringify({'ping': ping}));
+}
 
-        socket.onmessage = function (e) {
-            var now = new Date().getTime();
-            var data = JSON.parse(e.data);
-            ws_data.push(now - data.pong);
-        }
+socket.onmessage = function (e) {
+  var now = new Date().getTime();
+  var data = JSON.parse(e.data);
+  ws_data.push(now - data.pong);
+}
 
-        function plot() {
-            var trace_http = {y: http_data, type: 'box', name: 'http'};
-            var trace_ws = {y: ws_data, type: 'box', name: 'ws'};
-            Plotly.newPlot('plot', [trace_http, trace_ws])
-        }
+function plot() {
+  var trace_http = {y: http_data, type: 'box', name: 'http'};
+  var trace_ws = {y: ws_data, type: 'box', name: 'ws'};
+  Plotly.newPlot('plot', [trace_http, trace_ws])
+}
 
-        window.setInterval(wsping, 100);
-        window.setInterval(httpping, 100);
-        window.setInterval(plot, 500);
-    </script>
+window.setInterval(wsping, 100);
+window.setInterval(httpping, 100);
+window.setInterval(plot, 500);
+  </script>
 </html>

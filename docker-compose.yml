@@ -2,7 +2,7 @@ version: '3'
 
 services:
   redis:
-    image: redis
+    image: redis:alpine
     restart: unless-stopped
   app:
     build: .
@@ -14,9 +14,9 @@ services:
       - proxytanet
       - default
     labels:
-      - "traefik.enable=true"
-      - "traefik.frontend.rule=Host: chanping.${DOMAIN_NAME:-localhost}, www.chanping.${DOMAIN_NAME:-localhost}"
-      - "traefik.docker.network=proxytanet"
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host: chanping.${DOMAIN_NAME:-localhost}, www.chanping.${DOMAIN_NAME:-localhost}"
+      traefik.docker.network: "proxytanet"
 
 networks:
   proxytanet:

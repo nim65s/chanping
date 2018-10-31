@@ -3,9 +3,9 @@ import os
 PROJECT = 'chanping'
 PROJECT_VERBOSE = PROJECT.capitalize()
 
-DOMAIN_NAME = os.environ.get('DOMAIN_NAME', 'local')
+DOMAIN_NAME = os.environ.get('DOMAIN_NAME', 'localhost')
 HOSTNAME = os.environ.get('ALLOWED_HOST', f'{PROJECT}.{DOMAIN_NAME}')
-ALLOWED_HOSTS = [HOSTNAME, 'localhost']
+ALLOWED_HOSTS = [HOSTNAME]
 ALLOWED_HOSTS += [f'www.{host}' for host in ALLOWED_HOSTS]
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -7,7 +7,7 @@ WORKDIR /app
 
 ADD Pipfile Pipfile.lock ./
 
-RUN pip3 install pipenv \
+RUN pip3 install --no-cache-dir -U pipenv \
  && pipenv install --system --deploy
 
 ADD . .
