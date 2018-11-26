@@ -11,13 +11,12 @@ services:
     environment:
       - REDIS=redis
     networks:
-      - proxytanet
+      - web
       - default
     labels:
       traefik.enable: "true"
       traefik.frontend.rule: "Host: chanping.${DOMAIN_NAME:-localhost}, www.chanping.${DOMAIN_NAME:-localhost}"
-      traefik.docker.network: "proxytanet"
 
 networks:
-  proxytanet:
+  web:
     external: true
